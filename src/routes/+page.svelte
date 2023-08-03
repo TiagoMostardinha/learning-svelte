@@ -1,22 +1,33 @@
 <script lang="ts">
-    let name = "Yoshi";
-    let beltColor = "black";
+    let firstName: string = "Jimi";
+    let lastName: string = "Hendrix";
+    let beltColor: string = "black";
+
+    // Reactive value
+    $: fullName = `${firstName} ${lastName}`;
+
+    // Reactive statement
+    $: {
+        console.log(beltColor);
+        console.log(fullName);
+    }
 
     const handleClick = (e: Event) => {
-        beltColor = "green";
+        beltColor = "orange";
     };
 
     const handleInput = (e: Event) => {
         beltColor = (e.target as HTMLInputElement).value;
     };
+
+
+
 </script>
 
 <main>
-    <h1>Hello {name}!</h1>
-    <p style="color:{beltColor}">{beltColor} belt</p>
-    <button on:click={handleClick}>update belt colour</button>
-
-    <!-- <input type="text" on:input={handleInput} value={beltColor} /> -->
+    <p> {fullName} - {beltColor} belt</p>
+    <input type="text" bind:value={firstName} />
+    <input type="text" bind:value={lastName} />
     <input type="text" bind:value={beltColor} />
 </main>
 
