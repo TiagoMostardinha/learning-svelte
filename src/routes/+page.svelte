@@ -14,7 +14,10 @@
     
 </script>
 
-<Modal/>
+<!-- ++ -->
+<Modal message="Hey, I am a prop value" isPromo={false}/>
+<!-- ------------------------- -->
+
 <main>
     {#each people as person (person.id)}
         <div>
