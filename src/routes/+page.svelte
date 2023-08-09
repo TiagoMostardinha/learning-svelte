@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Person } from "$lib/types/Person";
-    import Modal from './Modal.svelte';
+    import Modal from '$lib/components/Modal.svelte';
 
     let people: Person[] = [
         { name: "yoshi", beltColor: "black", age: 25, id: 1 },
