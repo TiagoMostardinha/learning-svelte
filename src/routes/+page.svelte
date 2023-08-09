@@ -1,34 +1,23 @@
 <script lang="ts">
-    let firstName: string = "Jimi";
-    let lastName: string = "Hendrix";
-    let beltColor: string = "black";
+    import type { Person } from "$lib/types/Person";
 
-    // Reactive value
-    $: fullName = `${firstName} ${lastName}`;
-
-    // Reactive statement
-    $: {
-        console.log(beltColor);
-        console.log(fullName);
-    }
-
-    const handleClick = (e: Event) => {
-        beltColor = "orange";
-    };
-
-    const handleInput = (e: Event) => {
-        beltColor = (e.target as HTMLInputElement).value;
-    };
-
-
+    let people: Person[] = [
+        { name: "yoshi", beltColor: "black", age: 25, id: 1 },
+        { name: "mario", beltColor: "red", age: 35, id: 2 },
+        { name: "luigi", beltColor: "green", age: 45, id: 3 },
+    ];
 
 </script>
 
 <main>
-    <p> {fullName} - {beltColor} belt</p>
-    <input type="text" bind:value={firstName} />
-    <input type="text" bind:value={lastName} />
-    <input type="text" bind:value={beltColor} />
+    {#each people as person (person.id)}
+        <div>
+            <h4>{person.name}</h4>
+            <p> {person.age} years old, {person.beltColor} belt.</p>
+        </div>
+    {:else}
+        <p>There are no people to show.</p>
+    {/each}
 </main>
 
 <style>
@@ -37,13 +26,6 @@
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
-    }
-
-    h1 {
-        color: #ff6600;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
     }
 
     @media (min-width: 640px) {
