@@ -8,20 +8,37 @@
     ];
 
     const handleClick = (id: number) => {
-        people = people.filter(person => person.id !== id);
+        people = people.filter((person) => person.id !== id);
     };
 
+    // ++
+    let num: number = 15;
+    
 </script>
+
+{#if num > 20}
+    <p>Greater than 20</p>
+{:else if num > 10}
+    <p>Greater than 10</p>
+{:else}
+    <p>Less than 10</p>
+{/if}
+<!-- ------------------------------ -->
 
 <main>
     {#each people as person (person.id)}
         <div>
             <h4>{person.name}</h4>
-            <p> {person.age} years old, {person.beltColor} belt.</p>
 
             <!-- ++ -->
-            <button on:click={() => handleClick(person.id)}>delete</button>
+            {#if person.beltColor==="black"}
+                <p><strong>MASTER NINJA</strong></p>
+            {/if}
+
             <!-- ------------------------------ -->
+
+            <p>{person.age} years old, {person.beltColor} belt.</p>
+            <button on:click={() => handleClick(person.id)}>delete</button>
         </div>
     {:else}
         <p>There are no people to show.</p>
