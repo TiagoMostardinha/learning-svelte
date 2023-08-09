@@ -1,7 +1,10 @@
 <script lang="ts">
     let showModal: boolean = true;
+
+    // ++
     export let message: string = "default message";
     export let isPromo: boolean = false;
+    // -------------------------
 </script>
 
 {#if showModal}
