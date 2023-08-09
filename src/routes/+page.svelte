@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Person } from "$lib/types/Person";
+    import Modal from './Modal.svelte';
 
     let people: Person[] = [
         { name: "yoshi", beltColor: "black", age: 25, id: 1 },
@@ -10,32 +11,18 @@
     const handleClick = (id: number) => {
         people = people.filter((person) => person.id !== id);
     };
-
-    // ++
-    let num: number = 15;
     
 </script>
 
-{#if num > 20}
-    <p>Greater than 20</p>
-{:else if num > 10}
-    <p>Greater than 10</p>
-{:else}
-    <p>Less than 10</p>
-{/if}
-<!-- ------------------------------ -->
-
+<Modal/>
 <main>
     {#each people as person (person.id)}
         <div>
             <h4>{person.name}</h4>
 
-            <!-- ++ -->
             {#if person.beltColor==="black"}
                 <p><strong>MASTER NINJA</strong></p>
             {/if}
-
-            <!-- ------------------------------ -->
 
             <p>{person.age} years old, {person.beltColor} belt.</p>
             <button on:click={() => handleClick(person.id)}>delete</button>
