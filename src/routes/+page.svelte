@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Person } from "$lib/types/Person";
-    import Modal from '$lib/components/Modal.svelte';
+    import Modal from "$lib/components/Modal.svelte";
 
     let people: Person[] = [
         { name: "yoshi", beltColor: "black", age: 25, id: 1 },
@@ -8,22 +8,28 @@
         { name: "luigi", beltColor: "green", age: 45, id: 3 },
     ];
 
+    let showModal: boolean = false;
+
     const handleClick = (id: number) => {
         people = people.filter((person) => person.id !== id);
     };
-    
+
+    const toggleModal = () => {
+        showModal = !showModal;
+    };
 </script>
 
 <!-- ++ -->
-<Modal message="Hey, I am a prop value" isPromo={false}/>
-<!-- ------------------------- -->
+<Modal message="Hey, I am a prop value" {showModal} on:click={toggleModal}/>
 
 <main>
+    <button on:click={toggleModal}>Open Modal</button>
+    <!-- -------------------------------- -->
     {#each people as person (person.id)}
         <div>
             <h4>{person.name}</h4>
 
-            {#if person.beltColor==="black"}
+            {#if person.beltColor === "black"}
                 <p><strong>MASTER NINJA</strong></p>
             {/if}
 
