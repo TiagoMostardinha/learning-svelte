@@ -1,34 +1,35 @@
 <script lang="ts">
+    import type { Person } from "$lib/types/Person";
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
+
     let name: string;
     let age: number;
     let beltColor: string;
+    let skills: string[] = [];
 
-    /* T/F
-    let fighting: boolean;
-    let sneaking: boolean;
-    let running: boolean;
-    */
+    const handleSubmit = () => {
+        const person: Person = {
+            name:name,
+            age,
+            beltColor,
+            skills,
+            id: Math.random()*100
+        };
 
-    let skills:string[] = [];
-
-    const handleSubmit =() =>{
-        console.log(name, age, beltColor, skills);
+        dispatch("addPerson", person);
     };
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-    <input type="text" placeholder="name" bind:value={name}/>
-    <input type="number" placeholder="age" bind:value={age}/>
+    <input type="text" placeholder="name" bind:value={name} />
+    <input type="number" placeholder="age" bind:value={age} />
 
     <label>Skills:</label>
-    <!-- T/F
-    <input type="checkbox" bind:checked={fighting}/>fighting<br/>
-    <input type="checkbox" bind:checked={sneaking}/>sneaking<br/>
-    <input type="checkbox" bind:checked={running}/>running<br/> -->
-
-    <input type="checkbox" value="fighting" bind:group={skills}/>fighting<br/>
-    <input type="checkbox" value="sneaking" bind:group={skills}/>sneaking<br/>
-    <input type="checkbox" value="runnig" bind:group={skills}/>running<br/>
+    <input type="checkbox" value="fighting" bind:group={skills} />fighting<br />
+    <input type="checkbox" value="sneaking" bind:group={skills} />sneaking<br />
+    <input type="checkbox" value="running" bind:group={skills} />running<br />
 
     <select bind:value={beltColor}>
         <option value="black">black</option>
@@ -36,7 +37,7 @@
         <option value="brown">brown</option>
         <option value="white">white</option>
     </select>
-    
+
     <button type="submit">Add Person</button>
 </form>
 
