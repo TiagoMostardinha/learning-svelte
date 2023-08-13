@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { PollForm } from "$lib/types/PollForm";
+    import Button from "$lib/components/Button.svelte";
 
     let fields: PollForm = {
         question: "",
@@ -25,7 +26,7 @@
         <label for="answer-b">Answer B:</label>
         <input type="text" id="answer-b" bind:value={fields.answerB} />
     </div>
-    <button type="submit">Add Poll</button>
+    <Button type="secondary" flat={true}>Add New Poll</Button>
 </form>
 
 <style>

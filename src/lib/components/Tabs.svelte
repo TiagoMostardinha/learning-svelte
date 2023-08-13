@@ -35,8 +35,8 @@
         cursor: pointer;
     }
     .active {
-        color: #d91b42;
-        border-bottom: 2px solid #d91b42;
+        color: #ff4800;
+        border-bottom: 2px solid #ff4800;
         padding-bottom: 8px;
     }
 </style>
