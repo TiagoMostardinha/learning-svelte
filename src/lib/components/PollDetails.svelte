@@ -1,12 +1,13 @@
 <script lang="ts">
     import type { Poll } from "$lib/types/Poll";
+    import Card from "./Card.svelte";
     export let poll: Poll;
 
     // reactive values
     $: totalVotes = poll.votesA + poll.votesB;
 </script>
 
-<div class="poll">
+<Card>
     <h3>{poll.question}</h3>
     <p>Total Votes: {totalVotes}</p>
     <div class="answer">
@@ -17,7 +18,7 @@
         <div class="percent percent-b" />
         <span>{poll.answerB} ({poll.votesB})</span>
     </div>
-</div>
+</Card>
 
 <style>
     h3 {
