@@ -1,11 +1,12 @@
 <script lang="ts">
     import type { Poll } from "$lib/types/Poll";
+    import PollDetails from "./PollDetails.svelte";
     export let polls: Poll[] = [];
 </script>
 
 <div class="poll-list">
     {#each polls as poll (poll.id)}
-        <div>{poll.question}</div>
+        <PollDetails {poll} />
     {/each}
 </div>
 
