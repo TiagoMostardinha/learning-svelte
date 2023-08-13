@@ -1,6 +1,10 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
+    import type { Poll } from "$lib/types/Poll";
     import type { PollForm } from "$lib/types/PollForm";
     import Button from "$lib/components/Button.svelte";
+
+    const dispatch = createEventDispatcher();
 
     let fields: PollForm = {
         question: "",
@@ -44,9 +48,13 @@
 
         // add new poll
         if (valid) {
-            console.log(fields);
-        } else {
-            console.log(errors);
+            let poll: Poll = {
+                ...fields,
+                votesA: 0,
+                votesB: 0,
+                id: Math.random() * 100,
+            };
+            dispatch("addPoll", poll);
         }
     };
 </script>
