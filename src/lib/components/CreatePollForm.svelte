@@ -3,6 +3,7 @@
     import type { Poll } from "$lib/types/Poll";
     import type { PollForm } from "$lib/types/PollForm";
     import Button from "$lib/components/Button.svelte";
+    import PollStore from "../../data/PollStore";
 
     const dispatch = createEventDispatcher();
 
@@ -54,7 +55,13 @@
                 votesB: 0,
                 id: Math.random() * 100,
             };
-            dispatch("addPoll", poll);
+
+            // save to store
+            PollStore.update(currentPolls => {
+                return [poll, ...currentPolls];
+            });
+
+            dispatch("addPoll");
         }
     };
 </script>
