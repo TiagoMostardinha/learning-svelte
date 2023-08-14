@@ -2,15 +2,26 @@
     import type { Poll } from "$lib/types/Poll";
     import PollDetails from "$lib/components/PollDetails.svelte";
     import PollStore from "../../data/PollStore";
-    export let polls: Poll[] = [];
+    // import { onMount, onDestroy } from "svelte";
 
-    PollStore.subscribe((data) => {
-        polls = data;
-    });
+    // export let polls: Poll[] = [];
+
+    // const unsub = PollStore.subscribe((data) => {
+    //     polls = data;
+    // });
+
+    // onMount(() => {
+    //     console.log("component mounted");
+    // });
+
+    // onDestroy(() => {
+    //     unsub();
+    //     console.log("component destroyed");
+    // });
 </script>
 
 <div class="poll-list">
-    {#each polls as poll (poll.id)}
+    {#each $PollStore as poll (poll.id)}
         <PollDetails {poll} on:vote />
     {/each}
 </div>
