@@ -6,25 +6,6 @@
     import PollList from "$lib/components/PollList.svelte";
     import type { Poll } from "$lib/types/Poll";
 
-    let polls: Poll[] = [
-        {
-            id: 1,
-            question: "What is your favorite color?",
-            answerA: "Red",
-            answerB: "Blue",
-            votesA: 2,
-            votesB: 9,
-        },
-        {
-            id: 2,
-            question: "What do you like more?",
-            answerA: "Apples",
-            answerB: "Oranges",
-            votesA: 3,
-            votesB: 5,
-        },
-    ];
-
     let items: string[] = ["Current Polls", "Add new Poll"];
     let activeItem: string = "Current Polls";
 
@@ -58,7 +39,7 @@
 <main>
     <Tabs {items} {activeItem} on:tabChange={handleTabChange} />
     {#if activeItem === "Current Polls"}
-        <PollList {polls} on:vote={handleVote} />
+        <PollList on:vote={handleVote} />
     {:else if activeItem === "Add new Poll"}
         <CreatePollForm on:addPoll={handleAddPoll} />
     {/if}
