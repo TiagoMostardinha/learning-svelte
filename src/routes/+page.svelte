@@ -37,13 +37,28 @@
         activeItem = "Current Polls";
         console.log(polls);
     };
+
+    const handleVote = (e: CustomEvent) => {
+        const { option, id } = e.detail;
+        let copiedPolls = [...polls];
+        let upvotedPoll = copiedPolls.find((poll) => poll.id === id);
+        if (option === "a") {
+            upvotedPoll!.votesA++;
+        } else if (option === "b") {
+            upvotedPoll!.votesB++;
+        } else {
+            console.log("Invalid option");
+        }
+
+        polls = copiedPolls;
+    };
 </script>
 
 <Header />
 <main>
     <Tabs {items} {activeItem} on:tabChange={handleTabChange} />
     {#if activeItem === "Current Polls"}
-        <PollList {polls} />
+        <PollList {polls} on:vote={handleVote} />
     {:else if activeItem === "Add new Poll"}
         <CreatePollForm on:addPoll={handleAddPoll} />
     {/if}
