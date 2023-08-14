@@ -2,6 +2,7 @@
     import type { Poll } from "$lib/types/Poll";
     import PollStore from "../../data/PollStore";
     import Card from "./Card.svelte";
+    import Button from "$lib/components/Button.svelte";
 
     export let poll: Poll;
 
@@ -24,18 +25,29 @@
             return copiedPolls;
         });
     };
+
+    const handleDelte = (id: number) => {
+        PollStore.update((currentPolls) => {
+            return currentPolls.filter((poll) => poll.id !== id);
+        });
+    };
 </script>
 
 <Card>
-    <h3>{poll.question}</h3>
-    <p>Total Votes: {totalVotes}</p>
-    <div class="answer" on:click={() => handleVote("a", poll.id)}>
-        <div class="percent percent-a" style="width: {percentA}%" />
-        <span>{poll.answerA} ({poll.votesA})</span>
-    </div>
-    <div class="answer" on:click={() => handleVote("b", poll.id)}>
-        <div class="percent percent-b" style="width: {percentB}%" />
-        <span>{poll.answerB} ({poll.votesB})</span>
+    <div class="poll">
+        <h3>{poll.question}</h3>
+        <p>Total Votes: {totalVotes}</p>
+        <div class="answer" on:click={() => handleVote("a", poll.id)}>
+            <div class="percent percent-a" style="width: {percentA}%" />
+            <span>{poll.answerA} ({poll.votesA})</span>
+        </div>
+        <div class="answer" on:click={() => handleVote("b", poll.id)}>
+            <div class="percent percent-b" style="width: {percentB}%" />
+            <span>{poll.answerB} ({poll.votesB})</span>
+        </div>
+        <div class="delete">
+            <Button flat={true} on:click={() => handleDelte(poll.id)}>Delete</Button>
+        </div>
     </div>
 </Card>
 
@@ -75,5 +87,9 @@
     .percent-b {
         background: rgba(69, 196, 150, 0.2);
         border-left: 4px solid #45c496;
+    }
+    .delete {
+        margin-top: 30px;
+        text-align: center;
     }
 </style>

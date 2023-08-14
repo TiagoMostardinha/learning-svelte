@@ -4,7 +4,7 @@
     export let inverse: boolean = false;
 </script>
 
-<button class={type} class:flat class:inverse>
+<button class={type} class:flat class:inverse on:click>
     <slot />
 </button>
 
@@ -18,7 +18,7 @@
         box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
     }
     .primary {
-        background-color: #ff4800;
+        background-color: #d91b42;
         color: #fff;
     }
     .secondary {
@@ -30,8 +30,8 @@
     }
     .primary.inverse {
         background-color: #fff;
-        color: #ff4800;
-        border: 2px solid #ff4800;
+        color: #d91b42;
+        border: 2px solid #d91b42;
     }
     .secondary.inverse {
         background-color: #fff;
